@@ -1,6 +1,8 @@
 package com.youkwhan.trade_view.client;
 
 import com.youkwhan.trade_view.dto.AlphaVantageResponse;
+import com.youkwhan.trade_view.dto.DailyStockResponse;
+import com.youkwhan.trade_view.dto.StockHistoryResponse;
 import com.youkwhan.trade_view.dto.StockOverviewResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,6 +42,18 @@ public class StockClient {
                         .build())
                 .retrieve()
                 .bodyToMono(StockOverviewResponse.class)
+                .block();
+    }
+
+    public StockHistoryResponse getStockHistory(final String stockSymbol) {
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("function", "TIME_SERIES_DAILY")
+                        .queryParam("symbol", stockSymbol)
+                        .queryParam("apikey", apiKey)
+                        .build())
+                .retrieve()
+                .bodyToMono(StockHistoryResponse.class)
                 .block();
     }
 }
