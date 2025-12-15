@@ -1,6 +1,7 @@
 package com.youkwhan.trade_view.client;
 
 import com.youkwhan.trade_view.dto.AlphaVantageResponse;
+import com.youkwhan.trade_view.dto.StockOverviewResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,19 @@ public class StockClient {
                         .build())
                 .retrieve()
                 .bodyToMono(AlphaVantageResponse.class)
+                .block();
+    }
+
+    public StockOverviewResponse getStockOverview(final String stockSymbol) {
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/query")
+                        .queryParam("function", "OVERVIEW")
+                        .queryParam("symbol", stockSymbol)
+                        .queryParam("apikey", apiKey)
+                        .build())
+                .retrieve()
+                .bodyToMono(StockOverviewResponse.class)
                 .block();
     }
 }

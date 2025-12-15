@@ -1,5 +1,6 @@
 package com.youkwhan.trade_view.controller;
 
+import com.youkwhan.trade_view.dto.StockOverviewResponse;
 import com.youkwhan.trade_view.dto.StockResponse;
 import com.youkwhan.trade_view.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,8 @@ public class StockController {
         return stockService.getStockForSymbol(stockSymbol.toUpperCase());
     }
 
+    @GetMapping("/{stockSymbol}/overview")
+    public StockOverviewResponse getStockOverview(@PathVariable String stockSymbol) {
+        return stockService.getStockOverviewForSymbol(stockSymbol.toUpperCase());
+    }
 }
