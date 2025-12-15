@@ -1,8 +1,8 @@
 package com.youkwhan.trade_view.controller;
 
-import com.youkwhan.trade_view.dto.DailyStockResponse;
-import com.youkwhan.trade_view.dto.StockOverviewResponse;
-import com.youkwhan.trade_view.dto.StockResponse;
+import com.youkwhan.trade_view.dto.history.DailyStockResponse;
+import com.youkwhan.trade_view.dto.overview.StockOverviewResponse;
+import com.youkwhan.trade_view.dto.stock.StockResponse;
 import com.youkwhan.trade_view.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

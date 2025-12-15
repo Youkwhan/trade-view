@@ -1,7 +1,11 @@
 package com.youkwhan.trade_view.service;
 
 import com.youkwhan.trade_view.client.StockClient;
-import com.youkwhan.trade_view.dto.*;
+import com.youkwhan.trade_view.dto.history.DailyStockResponse;
+import com.youkwhan.trade_view.dto.history.StockHistoryResponse;
+import com.youkwhan.trade_view.dto.overview.StockOverviewResponse;
+import com.youkwhan.trade_view.dto.stock.AlphaVantageResponse;
+import com.youkwhan.trade_view.dto.stock.StockResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

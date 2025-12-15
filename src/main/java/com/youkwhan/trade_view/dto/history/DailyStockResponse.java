@@ -1,4 +1,4 @@
-package com.youkwhan.trade_view.dto;
+package com.youkwhan.trade_view.dto.history;
 
 public record DailyStockResponse(
         String date,

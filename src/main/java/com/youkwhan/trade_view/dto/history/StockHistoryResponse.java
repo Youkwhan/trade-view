@@ -1,4 +1,4 @@
-package com.youkwhan.trade_view.dto;
+package com.youkwhan.trade_view.dto.history;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

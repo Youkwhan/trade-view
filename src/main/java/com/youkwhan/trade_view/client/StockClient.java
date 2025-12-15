@@ -1,9 +1,8 @@
 package com.youkwhan.trade_view.client;
 
-import com.youkwhan.trade_view.dto.AlphaVantageResponse;
-import com.youkwhan.trade_view.dto.DailyStockResponse;
-import com.youkwhan.trade_view.dto.StockHistoryResponse;
-import com.youkwhan.trade_view.dto.StockOverviewResponse;
+import com.youkwhan.trade_view.dto.stock.AlphaVantageResponse;
+import com.youkwhan.trade_view.dto.history.StockHistoryResponse;
+import com.youkwhan.trade_view.dto.overview.StockOverviewResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.youkwhan.trade_view.dto;
+package com.youkwhan.trade_view.dto.overview;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
