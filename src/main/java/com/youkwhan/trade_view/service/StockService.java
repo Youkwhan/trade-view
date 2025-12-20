@@ -1,11 +1,15 @@
 package com.youkwhan.trade_view.service;
 
 import com.youkwhan.trade_view.client.StockClient;
+import com.youkwhan.trade_view.dto.favorite.FavoriteStockRequest;
 import com.youkwhan.trade_view.dto.history.DailyStockResponse;
 import com.youkwhan.trade_view.dto.history.StockHistoryResponse;
 import com.youkwhan.trade_view.dto.overview.StockOverviewResponse;
 import com.youkwhan.trade_view.dto.stock.AlphaVantageResponse;
 import com.youkwhan.trade_view.dto.stock.StockResponse;
+import com.youkwhan.trade_view.entity.FavoriteStock;
+import com.youkwhan.trade_view.repository.FavoriteStockRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +19,11 @@ import java.util.stream.Collectors;
 public class StockService {
 
     private final StockClient stockClient;
+    private FavoriteStockRepository favoriteStockRepository;
 
-    public StockService(final StockClient stockClient) {
+    public StockService(final StockClient stockClient, final FavoriteStockRepository favoriteStockRepository) {
         this.stockClient = stockClient;
+        this.favoriteStockRepository = favoriteStockRepository;
     }
 
     public StockResponse getStockForSymbol(final String stockSymbol) {
@@ -52,5 +58,16 @@ public class StockService {
                     );
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public FavoriteStock addFavorite(final String symbol) {
+        if (favoriteStockRepository.existsBySymbol(symbol)) {
+            throw new RuntimeException("Symbol already in stock" + symbol);
+        }
+
+        FavoriteStock favorite = FavoriteStock.builder().symbol(symbol).build();
+
+        return favoriteStockRepository.save(favorite);
     }
 }
