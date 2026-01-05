@@ -11,6 +11,7 @@ import com.youkwhan.trade_view.entity.FavoriteStock;
 import com.youkwhan.trade_view.exception.FavoriteAlreadyExistsException;
 import com.youkwhan.trade_view.repository.FavoriteStockRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class StockService {
         this.favoriteStockRepository = favoriteStockRepository;
     }
 
+    @Cacheable(value ="stocks", key = "#stockSymbol")
     public StockResponse getStockForSymbol(final String stockSymbol) {
         // Get our stock price from the AlphaAPI
         final AlphaVantageResponse response = stockClient.getStockQuote(stockSymbol);
