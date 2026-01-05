@@ -71,4 +71,12 @@ public class StockService {
 
         return favoriteStockRepository.save(favorite);
     }
+
+    public List<StockResponse> getFavoriteWithLivePrices() {
+        List<FavoriteStock> favorites = favoriteStockRepository.findAll();
+
+        return favorites.stream()
+                .map(fav -> getStockForSymbol(fav.getSymbol()))
+                .collect(Collectors.toList());
+    }
 }
