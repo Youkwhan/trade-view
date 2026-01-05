@@ -8,6 +8,7 @@ import com.youkwhan.trade_view.dto.overview.StockOverviewResponse;
 import com.youkwhan.trade_view.dto.stock.AlphaVantageResponse;
 import com.youkwhan.trade_view.dto.stock.StockResponse;
 import com.youkwhan.trade_view.entity.FavoriteStock;
+import com.youkwhan.trade_view.exception.FavoriteAlreadyExistsException;
 import com.youkwhan.trade_view.repository.FavoriteStockRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -63,7 +64,7 @@ public class StockService {
     @Transactional
     public FavoriteStock addFavorite(final String symbol) {
         if (favoriteStockRepository.existsBySymbol(symbol)) {
-            throw new RuntimeException("Symbol already in stock" + symbol);
+            throw new FavoriteAlreadyExistsException(symbol);
         }
 
         FavoriteStock favorite = FavoriteStock.builder().symbol(symbol).build();
