@@ -1,10 +1,13 @@
 package com.youkwhan.trade_view.controller;
 
+import com.youkwhan.trade_view.dto.favorite.FavoriteStockRequest;
 import com.youkwhan.trade_view.dto.history.DailyStockResponse;
 import com.youkwhan.trade_view.dto.overview.StockOverviewResponse;
 import com.youkwhan.trade_view.dto.stock.StockResponse;
+import com.youkwhan.trade_view.entity.FavoriteStock;
 import com.youkwhan.trade_view.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,5 +38,16 @@ public class StockController {
             @RequestParam(defaultValue = "30") int days
     ) {
         return stockService.getHistoryForSymbol(stockSymbol.toUpperCase(), days);
+    }
+
+    @PostMapping("/favorites")
+    public ResponseEntity<FavoriteStock> saveFavoriteStock(@RequestBody FavoriteStockRequest request) {
+        final FavoriteStock saved = stockService.addFavorite(request.getSymbol());
+        return ResponseEntity.ok(saved);
+    }
+
+    @GetMapping("/favorites")
+    public List<StockResponse> getFavoritesWithPrices() {
+        return stockService.getFavoriteWithLivePrices();
     }
 }

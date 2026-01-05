@@ -35,3 +35,6 @@ build/
 ### env ###
 .env
 src/main/resources/application-local.properties
+
+### Database ###
+data/
